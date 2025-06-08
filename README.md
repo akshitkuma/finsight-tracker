@@ -118,7 +118,7 @@ finsight/
 
 ## ✨ Credits
 
-- Developed by [Your Name](https://github.com/akshitkuma)
+- Developed by [Akshit Kumar](https://github.com/akshitkuma)
 - Icons: [Heroicons](https://heroicons.com/)
 - Charts: [Recharts](https://recharts.org/)
 
