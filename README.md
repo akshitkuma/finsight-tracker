@@ -16,11 +16,6 @@ A responsive full-stack web application to manage and analyze personal finances 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-- [Environment Variables](#environment-variables)
-- [Screenshots](#screenshots)
-- [License](#license)
-
 ---
 
 ## ✅ Features Implemented
