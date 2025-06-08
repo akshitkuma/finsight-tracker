@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#  FinSight – Personal Finance Tracker
 
-## Getting Started
+A full-stack web application designed to help users manage their personal finances with ease. Track income/expenses, set budgets, visualize category-wise spending, and gain monthly insights—all through a clean, intuitive interface.
 
-First, run the development server:
+---
+
+## 🔗 Live Demo
+
+🌐 [View Deployed App on Vercel](https://your-vercel-url.vercel.app)
+
+📁 [View Source Code on GitHub](https://github.com/akshitkuma/finsight-tracker)
+
+---
+
+## 🚀 Features Implemented
+
+### ✅ Stage 1: Basic Transaction Tracker
+- Add income/expense transactions
+- View all transactions in a list
+- Edit and delete transactions
+
+### ✅ Stage 2: Dashboard & Charts
+- Category-wise Pie Chart (Recharts)
+- Monthly Line Chart for trends
+- Clean and responsive dashboard layout
+
+### ✅ Stage 3: Budgeting & Insights
+- Set monthly budgets by category
+- Compare actual vs. budget with bar chart
+- Smart insights like over-budget detection
+- Top spending category display
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- [Next.js (App Router)](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Recharts](https://recharts.org/en-US/)
+
+### Backend
+- Node.js (Next.js API routes)
+- Prisma ORM
+- PostgreSQL (via Docker)
+- Redis (optional for caching/future use)
+
+---
+
+## ⚙️ Local Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/akshitkuma/finsight-tracker.git
+cd finsight
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+
+Create a `.env` file in the root:
+
+```
+DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/finsight"
+REDIS_URL="redis://localhost:6379"
+```
+
+### 4. Run PostgreSQL and Redis (via Docker)
+
+```bash
+docker-compose up -d
+```
+
+### 5. Setup the Database with Prisma
+
+```bash
+npx prisma migrate dev --name init
+npx prisma generate
+```
+
+### 6. Start the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Now visit [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📂 Project Structure
 
-## Learn More
+```
+finsight/
+├── prisma/
+│   └── schema.prisma
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   └── page.tsx
+│   ├── components/
+│   ├── lib/
+├── docker-compose.yml
+├── .env
+├── tailwind.config.ts
+├── README.md
+└── package.json
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ✨ Credits
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Developed by [Your Name](https://github.com/akshitkuma)
+- Icons: [Heroicons](https://heroicons.com/)
+- Charts: [Recharts](https://recharts.org/)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📩 Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For questions or feedback, reach out via GitHub or email at kakshit257@gmail.com
+
+---
+
+## 🏁 Submission Stage
+
+✅ **Stage 3 Completed**  
+🟢 Full Features Implemented  
+🏆 Ready for Evaluation
+
+---
