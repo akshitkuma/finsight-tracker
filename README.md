@@ -118,13 +118,18 @@ finsight/
 
 ## ✨ Credits
 
+<<<<<<< HEAD
 - Developed by [Your Name](https://github.com/akshitkuma)
+=======
+- Developed by [Akshit Kumar](https://github.com/akshitkuma)
+>>>>>>> fa29674d028c50434c4a0d805d5b753d1059d3b5
 - Icons: [Heroicons](https://heroicons.com/)
 - Charts: [Recharts](https://recharts.org/)
 
 ---
 
 ## 📩 Contact
+<<<<<<< HEAD
 
 For questions or feedback, reach out via GitHub or email at kakshit257@gmail.com
 
@@ -137,3 +142,18 @@ For questions or feedback, reach out via GitHub or email at kakshit257@gmail.com
 🏆 Ready for Evaluation
 
 ---
+=======
+
+For questions or feedback, reach out via GitHub or email at kakshit257@gmail.com
+
+---
+
+## 🏁 Submission Stage
+
+✅ **Stage 3 Completed**  
+🟢 Full Features Implemented  
+🏆 Ready for Evaluation
+
+---
+
+>>>>>>> fa29674d028c50434c4a0d805d5b753d1059d3b5
