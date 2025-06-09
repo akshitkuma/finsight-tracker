@@ -6,7 +6,7 @@ A full-stack web application designed to help users manage their personal financ
 
 ## 🔗 Live Demo
 
-🌐 [View Deployed App on Vercel](https://your-vercel-url.vercel.app)
+🌐 [View Deployed App on Vercel](https://finsight-tracker-d8bq.vercel.app/)
 
 📁 [View Source Code on GitHub](https://github.com/akshitkuma/finsight-tracker)
 
