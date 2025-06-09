@@ -15,22 +15,24 @@ export default function Home() {
   const [budgets, setBudgets] = useState<BudgetType[]>([])
   const [editingBudget, setEditingBudget] = useState<BudgetType | null>(null)
 
+  // Fetch all transactions
   const fetchTransactions = async () => {
     try {
       const res = await fetch('/api/transactions', { cache: 'no-store' })
       if (!res.ok) throw new Error('Failed to fetch transactions')
-      const data = await res.json()
+      const data: TransactionType[] = await res.json()
       setTransactions(data)
     } catch (error) {
       console.error(error)
     }
   }
 
+  // Fetch all budgets
   const fetchBudgets = async () => {
     try {
       const res = await fetch('/api/budgets', { cache: 'no-store' })
       if (!res.ok) throw new Error('Failed to fetch budgets')
-      const data = await res.json()
+      const data: BudgetType[] = await res.json()
       setBudgets(data)
     } catch (error) {
       console.error(error)
@@ -42,6 +44,7 @@ export default function Home() {
     fetchBudgets()
   }, [])
 
+  // Add transaction
   const addTransaction = async (transaction: TransactionType) => {
     try {
       const res = await fetch('/api/transactions', {
@@ -56,6 +59,7 @@ export default function Home() {
     }
   }
 
+  // Delete transaction
   const deleteTransaction = async (id: string) => {
     try {
       const res = await fetch(`/api/transactions?id=${id}`, { method: 'DELETE' })
@@ -66,6 +70,7 @@ export default function Home() {
     }
   }
 
+  // Edit transaction
   const editTransaction = async (updated: TransactionType) => {
     try {
       const res = await fetch('/api/transactions', {
@@ -80,12 +85,14 @@ export default function Home() {
     }
   }
 
+  // Add or edit budget
   const addOrEditBudget = async (budget: BudgetType) => {
     try {
       const updatedBudget = {
         ...budget,
-        id: budget.id ?? crypto.randomUUID(), // ensure id is always a string
+        id: budget.id ?? crypto.randomUUID(), // assign new id if not present
       }
+
       const method = budget.id ? 'PUT' : 'POST'
       const res = await fetch('/api/budgets', {
         method,
@@ -100,6 +107,7 @@ export default function Home() {
     }
   }
 
+  // Delete budget
   const deleteBudget = async (id: string) => {
     try {
       const res = await fetch(`/api/budgets?id=${id}`, { method: 'DELETE' })
@@ -117,22 +125,27 @@ export default function Home() {
           FinSight – Personal Finance Tracker
         </h1>
 
+        {/* Transaction Form */}
         <TransactionForm onSubmit={addTransaction} />
 
+        {/* Chart for all transactions */}
         <section className="my-8">
           <TransactionChart data={transactions} />
         </section>
 
+        {/* List of transactions */}
         <TransactionList
           transactions={transactions}
           onDelete={deleteTransaction}
           onEdit={editTransaction}
         />
 
+        {/* Budget section */}
         <section className="mt-12">
           <BudgetForm onSubmit={addOrEditBudget} editBudget={editingBudget} />
         </section>
 
+        {/* Budget vs Actual Chart */}
         <section className="mt-6">
           <BudgetVsActualChart
             budgets={budgets}
@@ -142,10 +155,12 @@ export default function Home() {
           />
         </section>
 
+        {/* Insights */}
         <section className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
           <Insights budgets={budgets} transactions={transactions} />
         </section>
 
+        {/* Pie Chart */}
         <section className="mt-12">
           <h2 className="text-xl font-bold mb-4 text-blue-700">Category-wise Spending</h2>
           <CategoryPieChart data={transactions} />

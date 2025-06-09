@@ -1,14 +1,15 @@
-export interface TransactionType {
-  id?: string;
-  amount: number;
-  category: string;
-  date: string;
-  description?: string;
-}
+// src/types.ts
 
 export type BudgetType = {
-  id: string
+  id?: string   // optional because new budgets may not have id yet
   category: string
-  month: string
+  month: string // format: 'YYYY-MM'
   amount: number
+}
+
+export type TransactionType = {
+  id?: string
+  category: string
+  amount: number
+  date: string  // ISO string or 'YYYY-MM-DD'
 }

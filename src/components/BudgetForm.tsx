@@ -1,15 +1,8 @@
+
 'use client'
 
 import { useEffect, useState } from 'react'
-
-const categories = ['Food', 'Rent', 'Travel', 'Bills', 'Shopping', 'Other']
-
-type BudgetType = {
-  id?: string
-  category: string
-  month: string
-  amount: number
-}
+import { BudgetType } from '@/types'
 
 type Props = {
   onSubmit: (data: BudgetType) => Promise<void>
@@ -21,6 +14,8 @@ type FormState = {
   month: string
   amount: string
 }
+
+const categories = ['Food', 'Rent', 'Travel', 'Bills', 'Shopping', 'Other']
 
 export default function BudgetForm({ onSubmit, editBudget }: Props) {
   const [form, setForm] = useState<FormState>({
@@ -48,9 +43,10 @@ export default function BudgetForm({ onSubmit, editBudget }: Props) {
     if (!form.category || !form.month || !form.amount) return
 
     const formattedData: BudgetType = {
-      ...form,
-      amount: parseFloat(form.amount),
       id: editBudget?.id,
+      category: form.category,
+      month: form.month,
+      amount: parseFloat(form.amount),
     }
 
     onSubmit(formattedData)
@@ -67,10 +63,8 @@ export default function BudgetForm({ onSubmit, editBudget }: Props) {
         required
       >
         <option value="">Select Category</option>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
+        {categories.map(cat => (
+          <option key={cat} value={cat}>{cat}</option>
         ))}
       </select>
 
