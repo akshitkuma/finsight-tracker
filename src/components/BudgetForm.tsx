@@ -1,15 +1,33 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const categories = ['Food', 'Rent', 'Travel', 'Bills', 'Shopping', 'Other']
 
-export default function BudgetForm({ onSubmit }: { onSubmit: (data: any) => void }) {
-  const [form, setForm] = useState({
+type BudgetType = {
+  id?: string
+  category: string
+  month: string
+  amount: string
+}
+
+type Props = {
+  onSubmit: (data: BudgetType) => void
+  editBudget: BudgetType | null
+}
+
+export default function BudgetForm({ onSubmit, editBudget }: Props) {
+  const [form, setForm] = useState<BudgetType>({
     category: '',
     month: '',
     amount: '',
   })
+
+  useEffect(() => {
+    if (editBudget) {
+      setForm(editBudget)
+    }
+  }, [editBudget])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -38,6 +56,7 @@ export default function BudgetForm({ onSubmit }: { onSubmit: (data: any) => void
           </option>
         ))}
       </select>
+
       <input
         type="month"
         name="month"
@@ -46,6 +65,7 @@ export default function BudgetForm({ onSubmit }: { onSubmit: (data: any) => void
         className="w-full border p-2 rounded"
         required
       />
+
       <input
         type="number"
         name="amount"
@@ -57,8 +77,9 @@ export default function BudgetForm({ onSubmit }: { onSubmit: (data: any) => void
         min="0"
         step="0.01"
       />
+
       <button type="submit" className="w-full bg-green-600 text-white p-2 rounded">
-        Set Budget
+        {editBudget ? 'Update Budget' : 'Set Budget'}
       </button>
     </form>
   )
