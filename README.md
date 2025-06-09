@@ -1,159 +1,121 @@
-#  FinSight – Personal Finance Tracker
 
-A full-stack web application designed to help users manage their personal finances with ease. Track income/expenses, set budgets, visualize category-wise spending, and gain monthly insights—all through a clean, intuitive interface.
+# 💰 FinSight – Personal Finance Tracker
+
+[![Vercel](https://img.shields.io/badge/Live%20Demo-Vercel-blue?logo=vercel)](https://finsight-tracker-d8bq.vercel.app/)
+[![GitHub Repo](https://img.shields.io/badge/Code-GitHub-black?logo=github)](https://github.com/akshitkuma/finsight-tracker)
 
 ---
 
-## 🔗 Live Demo
+## 📌 Project Overview
 
-🌐 [View Deployed App on Vercel](https://finsight-tracker-d8bq.vercel.app/)
+**FinSight** is a full-stack personal finance tracker that allows users to manage their income, expenses, and budgets with ease. Built using modern technologies, it offers a clean, responsive interface along with insightful financial charts.
 
-📁 [View Source Code on GitHub](https://github.com/akshitkuma/finsight-tracker)
+Developed as part of an internship assignment, this project demonstrates strong frontend and backend integration, database operations, and interactive data visualizations.
 
 ---
 
 ## 🚀 Features Implemented
 
-### ✅ Stage 1: Basic Transaction Tracker
-- Add income/expense transactions
-- View all transactions in a list
-- Edit and delete transactions
+### ✅ Stage 1
+- Add, view, and delete **transactions**
+- Dashboard showing:
+  - Total income
+  - Total expenses
+  - Net balance
 
-### ✅ Stage 2: Dashboard & Charts
-- Category-wise Pie Chart (Recharts)
-- Monthly Line Chart for trends
-- Clean and responsive dashboard layout
+### ✅ Stage 2
+- Add and manage **budget categories**
+- Category-wise budget overview via **pie charts**
+- Monthly **budgeting and tracking** with bar charts
 
-### ✅ Stage 3: Budgeting & Insights
-- Set monthly budgets by category
-- Compare actual vs. budget with bar chart
-- Smart insights like over-budget detection
-- Top spending category display
+### ✅ Stage 3
+- **Edit/Delete** functionality for budgets and transactions
+- **Single budget per category per month** enforced
+- Backend: PostgreSQL + Prisma ORM
+- UI enhanced with **shadcn/ui components**
+- Performance optimizations and responsive design
+
+---
+
+## ⚙️ Setup Instructions
+
+### 📍 Prerequisites
+
+- Node.js (v18+)
+- Docker (for PostgreSQL and Redis)
+- Git installed
+
+---
+
+### 💻 Local Development Steps
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/akshitkuma/finsight-tracker.git
+cd finsight-tracker
+
+# 2. Install dependencies
+npm install
+
+# 3. Copy and update environment variables
+cp .env.example .env
+# ➤ Fill in your PostgreSQL/Redis config
+
+# 4. Start database via Docker
+docker-compose up -d
+
+# 5. Run migrations
+npx prisma migrate dev
+
+# 6. Start development server
+npm run dev
+```
+
+👉 Open `http://localhost:3000` in your browser to access the app.
+
+---
+
+## 🌐 Live Deployment
+
+The project is live and accessible at:  
+🔗 **https://finsight-tracker-d8bq.vercel.app/**
 
 ---
 
 ## 🛠 Tech Stack
 
-### Frontend
-- [Next.js (App Router)](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Recharts](https://recharts.org/en-US/)
-
-### Backend
-- Node.js (Next.js API routes)
-- Prisma ORM
-- PostgreSQL (via Docker)
-- Redis (optional for caching/future use)
+| Layer       | Technology                         |
+|-------------|-------------------------------------|
+| Frontend    | Next.js (App Router), Tailwind CSS, shadcn/ui |
+| Charts      | Recharts                           |
+| Backend     | Next.js API Routes, Node.js        |
+| ORM         | Prisma ORM                         |
+| Database    | PostgreSQL (via Docker)            |
+| Deployment  | Vercel                             |
+| Optional    | Redis for caching                  |
 
 ---
 
-## ⚙️ Local Setup Instructions
 
-### 1. Clone the Repository
+## 👤 Author
 
-```bash
-git clone https://github.com/akshitkuma/finsight-tracker.git
-cd finsight
-```
-
-### 2. Install Dependencies
-
-```bash
-npm install
-```
-
-### 3. Setup Environment Variables
-
-Create a `.env` file in the root:
-
-```
-DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/finsight"
-REDIS_URL="redis://localhost:6379"
-```
-
-### 4. Run PostgreSQL and Redis (via Docker)
-
-```bash
-docker-compose up -d
-```
-
-### 5. Setup the Database with Prisma
-
-```bash
-npx prisma migrate dev --name init
-npx prisma generate
-```
-
-### 6. Start the Development Server
-
-```bash
-npm run dev
-```
-
-Now visit [http://localhost:3000](http://localhost:3000)
+**Akshit Kumar**  
+[GitHub – @akshitkuma](https://github.com/akshitkuma)
 
 ---
 
-## 📂 Project Structure
+## 📬 Contact
 
-```
-finsight/
-├── prisma/
-│   └── schema.prisma
-├── src/
-│   ├── app/
-│   │   ├── api/
-│   │   └── page.tsx
-│   ├── components/
-│   ├── lib/
-├── docker-compose.yml
-├── .env
-├── tailwind.config.ts
-├── README.md
-└── package.json
-```
+If you have questions, suggestions, or feedback:
+
+📧 kakshit257@gmail.com (or your preferred contact)
 
 ---
 
-## ✨ Credits
+## 📄 License
 
-<<<<<<< HEAD
-- Developed by [Your Name](https://github.com/akshitkuma)
-=======
-- Developed by [Akshit Kumar](https://github.com/akshitkuma)
->>>>>>> fa29674d028c50434c4a0d805d5b753d1059d3b5
-- Icons: [Heroicons](https://heroicons.com/)
-- Charts: [Recharts](https://recharts.org/)
+This project is for educational/demo purposes. You may modify or reuse parts with credit.
 
 ---
 
-## 📩 Contact
-<<<<<<< HEAD
-
-For questions or feedback, reach out via GitHub or email at kakshit257@gmail.com
-
----
-
-## 🏁 Submission Stage
-
-✅ **Stage 3 Completed**  
-🟢 Full Features Implemented  
-🏆 Ready for Evaluation
-
----
-=======
-
-For questions or feedback, reach out via GitHub or email at kakshit257@gmail.com
-
----
-
-## 🏁 Submission Stage
-
-✅ **Stage 3 Completed**  
-🟢 Full Features Implemented  
-🏆 Ready for Evaluation
-
----
-
->>>>>>> fa29674d028c50434c4a0d805d5b753d1059d3b5
+**Thanks for checking out FinSight!**
