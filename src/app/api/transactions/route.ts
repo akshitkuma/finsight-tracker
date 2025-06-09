@@ -1,5 +1,7 @@
-import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+
+export const dynamic = 'force-dynamic'
 
 // GET: Fetch all transactions
 export async function GET() {
@@ -10,7 +12,7 @@ export async function GET() {
 }
 
 // POST: Create new transaction
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const body = await req.json()
   const transaction = await prisma.transaction.create({
     data: {
@@ -24,7 +26,7 @@ export async function POST(req: Request) {
 }
 
 // PUT: Update existing transaction
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   const body = await req.json()
   const updated = await prisma.transaction.update({
     where: { id: body.id },

@@ -7,15 +7,16 @@ import TransactionChart from '@/components/TransactionChart'
 import BudgetForm from '@/components/BudgetForm'
 import BudgetVsActualChart from '@/components/BudgetVsActualChart'
 import Insights from '@/components/Insights'
-import CategoryPieChart from '@/components/CategoryPieChart' 
+import CategoryPieChart from '@/components/CategoryPieChart'
 
 export default function Home() {
   const [transactions, setTransactions] = useState([])
   const [budgets, setBudgets] = useState([])
+  const [editingBudget, setEditingBudget] = useState(null)
 
   const fetchTransactions = async () => {
     try {
-      const res = await fetch('/api/transactions')
+      const res = await fetch('/api/transactions', { cache: 'no-store' })
       if (!res.ok) throw new Error('Failed to fetch transactions')
       const data = await res.json()
       setTransactions(data)
@@ -26,7 +27,7 @@ export default function Home() {
 
   const fetchBudgets = async () => {
     try {
-      const res = await fetch('/api/budgets')
+      const res = await fetch('/api/budgets', { cache: 'no-store' })
       if (!res.ok) throw new Error('Failed to fetch budgets')
       const data = await res.json()
       setBudgets(data)
@@ -54,7 +55,7 @@ export default function Home() {
     }
   }
 
-  const deleteTransaction = async (id: string) => {
+  const deleteTransaction = async (id: any) => {
     try {
       const res = await fetch(`/api/transactions?id=${id}`, { method: 'DELETE' })
       if (!res.ok) throw new Error('Failed to delete transaction')
@@ -78,14 +79,26 @@ export default function Home() {
     }
   }
 
-  const addBudget = async (budget: any) => {
+  const addOrEditBudget = async (budget: { id: any }) => {
     try {
+      const method = budget.id ? 'PUT' : 'POST'
       const res = await fetch('/api/budgets', {
-        method: 'POST',
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(budget),
       })
-      if (!res.ok) throw new Error('Failed to add budget')
+      if (!res.ok) throw new Error('Failed to submit budget')
+      fetchBudgets()
+      setEditingBudget(null)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const deleteBudget = async (id: any) => {
+    try {
+      const res = await fetch(`/api/budgets?id=${id}`, { method: 'DELETE' })
+      if (!res.ok) throw new Error('Failed to delete budget')
       fetchBudgets()
     } catch (error) {
       console.error(error)
@@ -96,7 +109,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-tr from-blue-50 to-blue-100 font-sans text-gray-900 flex flex-col items-center justify-start py-10 px-4">
       <main className="w-full max-w-3xl bg-white rounded-2xl shadow-xl p-8 sm:p-12">
         <h1 className="text-4xl font-extrabold mb-8 text-center text-blue-700 tracking-tight drop-shadow-md">
-           FinSight – Personal Finance Tracker
+          FinSight – Personal Finance Tracker
         </h1>
 
         <TransactionForm onSubmit={addTransaction} />
@@ -112,17 +125,24 @@ export default function Home() {
         />
 
         <section className="mt-12">
-          <BudgetForm onSubmit={addBudget} />
+          <BudgetForm onSubmit={addOrEditBudget} editBudget={editingBudget} />
+        </section>
+
+        <section className="mt-6">
+          <BudgetVsActualChart
+            budgets={budgets}
+            transactions={transactions}
+            onEdit={setEditingBudget}
+            onDelete={deleteBudget}
+          />
         </section>
 
         <section className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <BudgetVsActualChart budgets={budgets} transactions={transactions} />
           <Insights budgets={budgets} transactions={transactions} />
         </section>
 
-       
         <section className="mt-12">
-          <h2 className="text-xl font-bold mb-4 text-blue-700"> Category-wise Spending</h2>
+          <h2 className="text-xl font-bold mb-4 text-blue-700">Category-wise Spending</h2>
           <CategoryPieChart data={transactions} />
         </section>
       </main>
