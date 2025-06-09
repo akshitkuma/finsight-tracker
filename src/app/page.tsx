@@ -8,11 +8,12 @@ import BudgetForm from '@/components/BudgetForm'
 import BudgetVsActualChart from '@/components/BudgetVsActualChart'
 import Insights from '@/components/Insights'
 import CategoryPieChart from '@/components/CategoryPieChart'
+import { TransactionType, BudgetType } from '@/types'
 
 export default function Home() {
-  const [transactions, setTransactions] = useState([])
-  const [budgets, setBudgets] = useState([])
-  const [editingBudget, setEditingBudget] = useState(null)
+  const [transactions, setTransactions] = useState<TransactionType[]>([])
+  const [budgets, setBudgets] = useState<BudgetType[]>([])
+  const [editingBudget, setEditingBudget] = useState<BudgetType | null>(null)
 
   const fetchTransactions = async () => {
     try {
@@ -41,7 +42,7 @@ export default function Home() {
     fetchBudgets()
   }, [])
 
-  const addTransaction = async (transaction: any) => {
+  const addTransaction = async (transaction: TransactionType) => {
     try {
       const res = await fetch('/api/transactions', {
         method: 'POST',
@@ -55,7 +56,7 @@ export default function Home() {
     }
   }
 
-  const deleteTransaction = async (id: any) => {
+  const deleteTransaction = async (id: string) => {
     try {
       const res = await fetch(`/api/transactions?id=${id}`, { method: 'DELETE' })
       if (!res.ok) throw new Error('Failed to delete transaction')
@@ -65,7 +66,7 @@ export default function Home() {
     }
   }
 
-  const editTransaction = async (updated: any) => {
+  const editTransaction = async (updated: TransactionType) => {
     try {
       const res = await fetch('/api/transactions', {
         method: 'PUT',
@@ -79,7 +80,7 @@ export default function Home() {
     }
   }
 
-  const addOrEditBudget = async (budget: { id: any }) => {
+  const addOrEditBudget = async (budget: BudgetType) => {
     try {
       const method = budget.id ? 'PUT' : 'POST'
       const res = await fetch('/api/budgets', {
@@ -95,7 +96,7 @@ export default function Home() {
     }
   }
 
-  const deleteBudget = async (id: any) => {
+  const deleteBudget = async (id: string) => {
     try {
       const res = await fetch(`/api/budgets?id=${id}`, { method: 'DELETE' })
       if (!res.ok) throw new Error('Failed to delete budget')
