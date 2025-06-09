@@ -8,16 +8,22 @@ type BudgetType = {
   id?: string
   category: string
   month: string
-  amount: string
+  amount: number
 }
 
 type Props = {
-  onSubmit: (data: BudgetType) => void
+  onSubmit: (data: BudgetType) => Promise<void>
   editBudget: BudgetType | null
 }
 
+type FormState = {
+  category: string
+  month: string
+  amount: string
+}
+
 export default function BudgetForm({ onSubmit, editBudget }: Props) {
-  const [form, setForm] = useState<BudgetType>({
+  const [form, setForm] = useState<FormState>({
     category: '',
     month: '',
     amount: '',
@@ -25,7 +31,11 @@ export default function BudgetForm({ onSubmit, editBudget }: Props) {
 
   useEffect(() => {
     if (editBudget) {
-      setForm(editBudget)
+      setForm({
+        category: editBudget.category,
+        month: editBudget.month,
+        amount: editBudget.amount.toString(),
+      })
     }
   }, [editBudget])
 
@@ -36,7 +46,14 @@ export default function BudgetForm({ onSubmit, editBudget }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!form.category || !form.month || !form.amount) return
-    onSubmit(form)
+
+    const formattedData: BudgetType = {
+      ...form,
+      amount: parseFloat(form.amount),
+      id: editBudget?.id,
+    }
+
+    onSubmit(formattedData)
     setForm({ category: '', month: '', amount: '' })
   }
 

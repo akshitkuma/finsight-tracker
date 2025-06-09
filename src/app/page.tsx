@@ -82,11 +82,15 @@ export default function Home() {
 
   const addOrEditBudget = async (budget: BudgetType) => {
     try {
+      const updatedBudget = {
+        ...budget,
+        id: budget.id ?? crypto.randomUUID(), // ensure id is always a string
+      }
       const method = budget.id ? 'PUT' : 'POST'
       const res = await fetch('/api/budgets', {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(budget),
+        body: JSON.stringify(updatedBudget),
       })
       if (!res.ok) throw new Error('Failed to submit budget')
       fetchBudgets()

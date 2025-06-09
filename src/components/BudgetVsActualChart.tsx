@@ -53,7 +53,7 @@ export default function BudgetVsActualChart({ budgets, transactions }: Props) {
     if (res.ok) location.reload()
   }
 
-  const startEdit = (item: any) => {
+  const startEdit = (item: typeof chartData[0]) => {
     setEditing(item.id)
     setForm({
       amount: item.Budget.toString(),
@@ -62,7 +62,7 @@ export default function BudgetVsActualChart({ budgets, transactions }: Props) {
     })
   }
 
-  const handleEditSubmit = async (e: any) => {
+  const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const res = await fetch('/api/budgets', {
       method: 'PUT',
@@ -110,7 +110,13 @@ export default function BudgetVsActualChart({ budgets, transactions }: Props) {
                     className="border p-1 rounded w-40"
                   />
                   <button type="submit" className="bg-blue-600 text-white px-3 py-1 rounded">Save</button>
-                  <button onClick={() => setEditing(null)} className="text-gray-600">Cancel</button>
+                  <button
+                    type="button"
+                    onClick={() => setEditing(null)}
+                    className="text-gray-600"
+                  >
+                    Cancel
+                  </button>
                 </form>
               ) : (
                 <li key={item.id} className="flex justify-between items-center bg-gray-50 p-2 rounded">
@@ -118,8 +124,12 @@ export default function BudgetVsActualChart({ budgets, transactions }: Props) {
                     <strong>{item.category}</strong> — Budget ₹{item.Budget.toFixed(2)}, Spent ₹{item.Actual.toFixed(2)}
                   </span>
                   <div className="space-x-2">
-                    <button onClick={() => startEdit(item)} className="text-blue-600 hover:underline">Edit</button>
-                    <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">Delete</button>
+                    <button onClick={() => startEdit(item)} className="text-blue-600 hover:underline">
+                      Edit
+                    </button>
+                    <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline">
+                      Delete
+                    </button>
                   </div>
                 </li>
               )

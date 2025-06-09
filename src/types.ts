@@ -6,9 +6,9 @@ export interface TransactionType {
   description?: string;
 }
 
-export interface BudgetType {
-  id?: string;
-  category: string;
-  amount: number;
-  month: string;
+export type BudgetType = {
+  id: string
+  category: string
+  month: string
+  amount: number
 }
